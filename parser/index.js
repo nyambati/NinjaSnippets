@@ -1,12 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-
-
-
-
 function getSnippet(file) {
-  return fs.readFileSync(path.resolve(`lib/${file}.snippet`), 'utf8');
+  try {
+    return fs
+      .readFileSync(path.resolve(`snippets/${file}.snippet`), 'utf8');
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 function parseSnippet(snippet, content) {
