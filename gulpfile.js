@@ -37,7 +37,7 @@ gulp.task('lint', function () {
 
 gulp.task('watch', () => {
   gulp.watch('snippets/**.snippet', ['lint', 'build']);
-  gulp.watch('config.yaml', ['build']);
+  gulp.watch('config.yml', ['build']);
 });
 
 gulp.task('default', ['lint', 'build', 'watch']);
