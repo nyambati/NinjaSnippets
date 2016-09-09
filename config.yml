@@ -19,3 +19,14 @@
   trigger: node:route
   scope: source.js
 
+- name: node-mount
+  description: Expressjs mount routes
+  trigger: node:mount
+  scope: source.js
+
+- name: node-use
+  description: Express use function
+  trigger: node:use
+  scope: source.js
+
+
