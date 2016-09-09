@@ -14,3 +14,8 @@
   trigger: node:ctrl
   scope: source.js
 
+- name: node-route
+  description: Expressjs route
+  trigger: node:route
+  scope: source.js
+

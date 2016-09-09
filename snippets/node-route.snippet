@@ -1,0 +1,16 @@
+'use strict'
+const Router = require('express').Router();
+const ${1:ModelName} = require('./${2:ModelFile}')
+const ${3:CtrlName} = require('./${4:CtrlFile}')(${1:ModelName});
+
+Router.route('/${5:ModelName}')
+  .post(${3:ModelName}.create)
+  .get(${3:ModelName}.all)
+
+Router.route('/${5:ModelName}/:id')
+  .get(${3:ModelName}.find)
+  .put(${3:ModelName}.update)
+  .delete(${3:ModelName}.destroy);
+
+// export the Router
+module.exports = Router;

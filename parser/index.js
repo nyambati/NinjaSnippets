@@ -6,7 +6,7 @@ function getSnippet(file) {
     return fs
       .readFileSync(path.resolve(`snippets/${file}.snippet`), 'utf8');
   } catch (err) {
-    console.log(err.message);
+    fs.writeFileSync(path.resolve(`snippets/${file}.snippet`), '\'use strict\';');
   }
 }
 
