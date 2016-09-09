@@ -1,0 +1,16 @@
+"use strict";
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+
+let ${1:ModelName} = new Schema({
+  name:{
+    type:String,
+    required:true
+  }
+
+  //${2:more definition here}
+});
+
+// export the model
+module.exports = mongoose.model('${1:ModelName}', ${1:ModelName});

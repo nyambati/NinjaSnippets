@@ -9,17 +9,3 @@
   trigger: 'node:model'
   scope: 'source.js'
 
-- name: 'ng-module'
-  description: 'Mongoose Model defination'
-  trigger: 'ng:module'
-  scope: 'source.js'
-
-- name: 'ng-comp'
-  description: 'Mongoose Model defination'
-  trigger: 'ng:comp'
-  scope: 'source.js'
-
-- name: 'exp-ctrl'
-  description: 'Express Controller'
-  trigger: 'exp:ctrl'
-  scope: 'source.js'

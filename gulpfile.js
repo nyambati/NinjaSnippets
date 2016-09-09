@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const jshint = require('gulp-jshint');
+const shell = require('gulp-shell');
 const parse = require('./parser');
 const fs = require('fs');
 const yaml = require('js-yaml');
@@ -16,13 +17,17 @@ function readConfig() {
 
 }
 
-gulp.task('build', () => {
+gulp.task('parse', () => {
   const config = readConfig();
   return config.forEach((snippetConfig) => {
-    console.log(snippetConfig);
     parse(snippetConfig);
   });
 });
+
+gulp.task('build', ['parse'], shell.task([
+  'chmod 0755 install.sh',
+  './install.sh'
+]));
 
 gulp.task('lint', function () {
   return gulp.src('lib/**/*.snippet')
