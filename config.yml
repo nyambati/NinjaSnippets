@@ -25,7 +25,7 @@
   scope: source.js
 
 - name: node-use
-  description: Express use function
+  description: Express app.use() function
   trigger: node:use
   scope: source.js
 
