@@ -1,0 +1,26 @@
+{
+  "name": "ninja",
+  "version": "1.0.0",
+  "description": "This are snippets for mean stack development environment",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-thomas/sublime-mean-snippets.git"
+  },
+  "author": "Nyambati Thomas <thomas.nyambati@andela.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-thomas/sublime-mean-snippets/issues"
+  },
+  "homepage": "https://github.com/andela-thomas/sublime-mean-snippets#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.1",
+    "jshint": "^2.9.3",
+    "jshint-stylish": "^2.2.1"
+  }
+}
