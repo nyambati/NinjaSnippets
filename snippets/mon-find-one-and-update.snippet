@@ -1,0 +1,13 @@
+${1:ModelName}
+  .findOneAndUpdate(${2:conditions}, ${3:options})
+  .exec()
+  .then((response) => {
+    return res
+      .status(200)
+      .json(response);
+  })
+  .catch((error) => {
+    return res
+      .status(500)
+      .json(error);
+  });
