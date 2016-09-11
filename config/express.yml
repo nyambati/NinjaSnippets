@@ -24,8 +24,3 @@
   trigger: node:mount
   scope: source.js
 
-- name: node-use
-  description: Express app.use() function
-  trigger: node:use
-  scope: source.js
-
