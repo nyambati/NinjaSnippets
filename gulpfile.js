@@ -2,13 +2,16 @@
 const gulp = require('gulp');
 const jshint = require('gulp-jshint');
 const shell = require('gulp-shell');
-const { parse, buildConfigArray } = require('./parser');
+const clean = require('gulp-clean');
+const { buildSnippets } = require('./parser');
 
-gulp.task('parse', () => {
-  const config = buildConfigArray();
-  return config.forEach((snippetConfig) => {
-    parse(snippetConfig);
-  });
+gulp.task('clean', function () {
+  return gulp.src('./ninjaSnippet', { read: false })
+    .pipe(clean());
+});
+
+gulp.task('parse', ['clean'], () => {
+  buildSnippets('config.yml');
 });
 
 gulp.task('build', ['parse'], shell.task([

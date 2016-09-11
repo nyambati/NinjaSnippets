@@ -29,6 +29,9 @@ ${ content }
 }
 
 function parse(snippet) {
+  if (snippet.ignore) {
+    return false;
+  }
   let content = getSnippet(snippet.name);
   let parsedSnippet = parseSnippet(snippet, content);
   let folder = 'ninjaSnippet';
@@ -59,16 +62,19 @@ function readConfig(file) {
 }
 
 
-// Build the  config array
-function buildConfigArray() {
-  let buffer;
-  let config = [];
+// Build the  configuraton array
+function buildConfigArray(file) {
+  let buffer, config = [];
+
   try {
-    buffer = yaml.safeLoad(fs.readFileSync(path.resolve('config.yml')));
+    buffer = yaml.safeLoad(fs.readFileSync(path.resolve(file)));
   } catch (err) {
     console.log(err.message);
   }
 
+  if (buffer.environment === null) {
+    return console.log('No configuraton supplied for a build');
+  }
   buffer.environment.forEach((environment) => {
     config = config.concat(readConfig(environment));
   });
@@ -76,6 +82,16 @@ function buildConfigArray() {
   return config;
 }
 
+// export snippet buildng function
+module.exports.buildSnippets = function buildSnippets(filePath) {
+  const config = buildConfigArray(filePath);
+  if (config) {
+    return config.forEach((snippetConfig) => {
+      parse(snippetConfig);
+    });
+  }
+  process.exit(0);
+}
 
-module.exports.parse = parse;
+
 module.exports.buildConfigArray = buildConfigArray;
