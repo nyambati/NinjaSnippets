@@ -1,0 +1,31 @@
+---
+- name: node-server
+  description: Node main server
+  trigger: node:server
+  scope: source.js
+
+- name: node-model
+  description: Mongoose Model defination
+  trigger: node:model
+  scope: source.js
+
+- name: node-ctrl
+  description: Expressjs controller
+  trigger: node:ctrl
+  scope: source.js
+
+- name: node-route
+  description: Expressjs route
+  trigger: node:route
+  scope: source.js
+
+- name: node-mount
+  description: Expressjs mount routes
+  trigger: node:mount
+  scope: source.js
+
+- name: node-use
+  description: Express app.use() function
+  trigger: node:use
+  scope: source.js
+
