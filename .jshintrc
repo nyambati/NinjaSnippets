@@ -1,6 +1,6 @@
 {
-  "node":true,
-  "esversion":6,
-  "asi":true,
-  "moz":true
+  "node": true,
+  "esversion": 6,
+  "asi": true,
+  "moz": true
 }

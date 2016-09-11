@@ -1,12 +1,14 @@
+"use strict";
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 function getSnippet(file) {
+  let filePath = path.resolve(`snippets/${file}.snippet`)
   try {
-    return fs
-      .readFileSync(path.resolve(`snippets/${file}.snippet`), 'utf8');
+    return fs.readFileSync(filePath, 'utf8');
   } catch (err) {
-    fs.writeFileSync(path.resolve(`snippets/${file}.snippet`), '\'use strict\';');
+    fs.writeFileSync(path.resolve(filePath), '\'use strict\';');
   }
 }
 
@@ -31,14 +33,49 @@ function parse(snippet) {
   let parsedSnippet = parseSnippet(snippet, content);
   let folder = 'ninjaSnippet';
 
+  // Check if the folder exist and creare one if not
   if (!fs.readdirSync('./').includes(folder)) {
     fs.mkdirSync(folder);
   }
 
-  fs.writeFileSync(path.resolve(`${folder}/${snippet.name}.sublime-snippet`), parsedSnippet);
+  // Genereate the path for the file
+  let filePath = path.resolve(`${folder}/${snippet.name}.sublime-snippet`)
 
+  // write the built snippet to the snippet folder
+  return fs.writeFileSync(filePath, parsedSnippet);
 
 }
 
+// Read config file
 
-module.exports = parse;
+function readConfig(file) {
+  let buffer;
+  try {
+    buffer = fs.readFileSync(`config/${file}.yml`);
+  } catch (err) {
+    return console.log(err.message);
+  }
+  return yaml.safeLoad(buffer);
+}
+
+
+// Build the  config array
+function buildConfigArray() {
+  let buffer;
+  let config = [];
+  try {
+    buffer = yaml.safeLoad(fs.readFileSync(path.resolve('config.yml')));
+  } catch (err) {
+    console.log(err.message);
+  }
+
+  buffer.environment.forEach((environment) => {
+    config = config.concat(readConfig(environment));
+  });
+
+  return config;
+}
+
+
+module.exports.parse = parse;
+module.exports.buildConfigArray = buildConfigArray;
