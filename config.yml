@@ -3,3 +3,4 @@ environment:
   - angular
   - express
   - mongoose
+  - gulp

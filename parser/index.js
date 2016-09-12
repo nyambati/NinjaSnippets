@@ -29,9 +29,11 @@ ${ content }
 }
 
 function parse(snippet) {
-  if (snippet.ignore) {
+  // return ig not snippet has been supplied
+  if (!snippet || snippet.ignore) {
     return false;
   }
+
   let content = getSnippet(snippet.name);
   let parsedSnippet = parseSnippet(snippet, content);
   let folder = 'ninjaSnippet';
