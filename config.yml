@@ -6,6 +6,5 @@ sublime:
   - gulp
 vscode:
   javascript:
-    - angular
     - mongoose
     - express

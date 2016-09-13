@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ex
+set -e
 
 # Sublime and vscode folders
 VSCODE_SNIPPET_FOLDER="vscode"
@@ -18,7 +18,7 @@ fi
 # script  for installing sublime snippet
 function install_sublime_snippet() {
   if [[ -d "${SUBLIME_SNIPPET_FOLDER}" ]]; then
-    cp -av $SUBLIME_SNIPPET_FOLDER/ "${SUBLIME_PACKAGE}/${SUBLIME_SNIPPET_FOLDER}"
+    cp -a $SUBLIME_SNIPPET_FOLDER/ "${SUBLIME_PACKAGE}/${SUBLIME_SNIPPET_FOLDER}"
   fi
 }
 
