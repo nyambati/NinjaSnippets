@@ -3,26 +3,46 @@ const gulp = require('gulp');
 const jshint = require('gulp-jshint');
 const shell = require('gulp-shell');
 const clean = require('gulp-clean');
-const { buildSnippets } = require('./parser');
+const {
+  buildSublimeSnippets,
+  buildVscodeSnippets
+} = require('./parser');
 
-gulp.task('clean', function () {
-  return gulp.src('./ninjaSnippet', { read: false })
+
+gulp.task('clean:sublime', function() {
+  return gulp.src(['./ninjaSnippet'], {
+      read: false
+    })
     .pipe(clean());
 });
 
-gulp.task('parse', ['clean'], () => {
-  buildSnippets('config.yml');
+gulp.task('clean:vscode', () => {
+  return gulp.src(['./vscode'], {
+      read: false
+    })
+    .pipe(clean());
+})
+
+gulp.task('build:sublime', ['clean:sublime'], () => {
+  return buildSublimeSnippets('config.yml', 'ninjaSnippet');
 });
 
-gulp.task('build', ['parse'], shell.task([
+gulp.task('build:vscode', ['clean:vscode'], () => {
+  return buildVscodeSnippets('config.yml', 'vscode');
+});
+
+gulp.task('build', ['build:sublime', 'build:vscode'], shell.task([
   'chmod 0755 install.sh',
-  './install.sh'
+  './install.sh -i vscode',
+  './install.sh -i sublime'
 ]));
 
-gulp.task('lint', function () {
+gulp.task('lint', () => {
   return gulp.src('lib/**/*.snippet')
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish', { verbose: true }));
+    .pipe(jshint.reporter('jshint-stylish', {
+      verbose: true
+    }));
 });
 
 gulp.task('watch', () => {
