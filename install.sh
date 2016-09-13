@@ -67,10 +67,11 @@ function install_sublime() {
 
 # program usage function
 function programme_usage {
-    echo "usage: $PROGRAMME [-ibch] <editor>"
-    echo "  -i    Install snippets"
-    echo "  -r    uninstall snippets"
-    echo "  -h    display help"
+    echo "usage: $PROGRAMME [-irlh] <value>"
+    echo "  -i    [-i <editor> ]     Install snippets"
+    echo "  -r    [-r <editor> ]     Uninstall snippets"
+    echo "  -l    [-l <language> ]   Language to unistall, works for VS Code only"
+    echo "  -h                       Display help"
     exit 1
 }
 
@@ -90,15 +91,18 @@ while getopts ":i:r:l:h" opt; do
         echo "Commad ${OPTARG} was not found"
       fi
       ;;
+
     r) EDITOR=$OPTARG;;
+
     l) EDITOR_LANG=$OPTARG;;
-    h)
-      echo "-a was triggered, Parameter: $OPTARG" >&2
-      ;;
+
+    h) programme_usage ;;
+
     \?)
       echo "Invalid option: -$OPTARG" >&2
       exit 1
       ;;
+
     :)
       echo "Option -$OPTARG requires an argument." >&2
       exit 1
