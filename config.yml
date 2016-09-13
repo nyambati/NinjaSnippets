@@ -1,5 +1,5 @@
 ---
-environment:
+sublime:
   - angular
   - express
   - mongoose
