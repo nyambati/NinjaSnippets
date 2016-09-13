@@ -72,11 +72,12 @@ function programme_usage {
     echo "  -r    [-r <editor> ]     Uninstall snippets"
     echo "  -l    [-l <language> ]   Language to unistall, works for VS Code only"
     echo "  -h                       Display help"
-    exit 1
+    exit 0
 }
 
 if [[ $# -eq 0 ]]; then
   programme_usage
+  exit 1
 fi
 
 # usage prompr por ninja script
@@ -111,7 +112,6 @@ while getopts ":i:r:l:h" opt; do
 done
 
 # uninstall snippet
-echo " this is the editot $EDITOR_LANG"
 function uninstall_vscode() {
   rm -f "${VSCODE_PACKAGE}/${EDITOR_LANG}.json"
   if [[ "$?" -eq "0" ]]; then
