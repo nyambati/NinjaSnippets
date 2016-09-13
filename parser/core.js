@@ -74,3 +74,11 @@ ${ content }
   return (template);
 
 }
+
+
+module.exports.createFolder = (folder) => {
+  // Check if the folder exist and creare one if not
+  if (!fs.readdirSync('./').includes(folder)) {
+    return fs.mkdirSync(folder);
+  }
+}

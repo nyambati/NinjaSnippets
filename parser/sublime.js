@@ -5,7 +5,8 @@ const {
   readSnippetFile,
   compileSublimeSnippetTemplate,
   readSnippetConfig,
-  readYaml
+  readYaml,
+  createFolder
 } = require('./core');
 
 
@@ -43,10 +44,7 @@ module.exports.compileSublimeSnippet = (snippet, folder) => {
   let content = readSnippetFile(snippet.name);
   let parsedSnippet = compileSublimeSnippetTemplate(snippet, content);
 
-  // Check if the folder exist and creare one if not
-  if (!fs.readdirSync('./').includes(folder)) {
-    fs.mkdirSync(folder);
-  }
+  createFolder(folder);
 
   // Genereate the path for the file
   let filePath = path.resolve(`${folder}/${snippet.name}.sublime-snippet`)

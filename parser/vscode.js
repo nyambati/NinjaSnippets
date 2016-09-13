@@ -1,12 +1,21 @@
 "use strict";
+const fs = require('fs');
+const path = require('path');
 const {
   readSnippetConfig,
-  readSnippetFile
+  readSnippetFile,
+  readYaml,
+  createFolder
 } = require('./core');
 
 
-module.exports.buildVscodeConfig = (buffer, editor) => {
-  let config = buffer[editor];
+module.exports.buildVscodeConfig = (file, editor) => {
+  let vsCodeConfig = readYaml(file);
+  let config = vsCodeConfig[editor];
+  if (Array.isArray(config)) {
+    console.log('config should be a map');
+    return [];
+  }
 
   function merge(configLang) {
     var langArray = [];
@@ -22,7 +31,7 @@ module.exports.buildVscodeConfig = (buffer, editor) => {
   return config;
 }
 
-module.exports.buidVscodeSnippetsObject = (config) => {
+module.exports.compileVscodeSnippets = (config) => {
   function mutate(configLang) {
     let snippet = {};
 
@@ -43,4 +52,24 @@ module.exports.buidVscodeSnippetsObject = (config) => {
   }
 
   return config;
+}
+
+module.exports.buildVscodeSnippet = (lang, content, folder) => {
+  if (!lang && !content) {
+    console.log("Language and snippet content required");
+    return process.exit(0);
+  }
+
+  createFolder(folder);
+
+  let filePath = path.resolve(`${folder}/${lang}.json`);
+
+  // parse the content to json
+  content = JSON.stringify(content, null, 2);
+
+  try {
+    fs.writeFile(filePath, content);
+  } catch (err) {
+    throw err;
+  }
 }
