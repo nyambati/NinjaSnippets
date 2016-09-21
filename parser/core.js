@@ -3,12 +3,21 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-
+/**
+ * Read yaml
+ * Reads yaml files and converts to json file
+ *
+ */
 function readYaml(filePath) {
   return yaml.safeLoad(fs.readFileSync(path.resolve(filePath)));
 }
 
 module.exports.readYaml = readYaml;
+
+/**
+ * Read snippet config
+ * Takes file name and return JSON object od snippet config.
+ */
 
 module.exports.readSnippetConfig = function(file) {
   let config;
@@ -20,6 +29,10 @@ module.exports.readSnippetConfig = function(file) {
   return config;
 }
 
+/**
+ * Read snippet file
+ * Takes file name and returns  the snippet contents as string
+ */
 
 module.exports.readSnippetFile = (file) => {
 
@@ -33,6 +46,12 @@ module.exports.readSnippetFile = (file) => {
     return fs.readFileSync(filePath, 'utf8')
   }
 }
+
+/**
+ * Build Visual studio Code snippet
+ * Takes filename, foldername and snippet content
+ * creates json files for each language
+ */
 
 module.exports.buidVscodeSnippets = (file, folder, content) => {
   if (!content && !file && !folder) {
@@ -52,6 +71,12 @@ module.exports.buidVscodeSnippets = (file, folder, content) => {
     console.log(err.message);
   }
 }
+
+/**
+ * Build sublime snippet templates
+ * Takes snippet config and the content
+ * returns Build sublime snippet
+ */
 
 module.exports.compileSublimeSnippetTemplate = (snippet, content) => {
 
@@ -75,6 +100,11 @@ ${ content }
 
 }
 
+/**
+ * Create folder
+ * Checks if the folder exist
+ * Creates on if it doesnot exist.
+ */
 
 module.exports.createFolder = (folder) => {
   // Check if the folder exist and creare one if not
