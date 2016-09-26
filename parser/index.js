@@ -23,5 +23,5 @@ module.exports.buildVscodeSnippets = (file, folder) => {
 
   Object.keys(compiledSnippets).forEach((lang) => {
     buildVscodeSnippet(lang, compiledSnippets[lang], 'vscode');
-  })
+  });
 };

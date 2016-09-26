@@ -19,7 +19,7 @@ module.exports.readYaml = readYaml;
  * Takes file name and return JSON object od snippet config.
  */
 
-module.exports.readSnippetConfig = function(file) {
+module.exports.readSnippetConfig = function (file) {
   let config;
   try {
     config = readYaml(`config/${file}.yml`);
