@@ -5,6 +5,7 @@
   description: Mongoose find query method
   trigger: mon:find
   scope: source.js
+  ignore: true
 
 - name: mon-find-one
   description: Mongoose findOne query method
