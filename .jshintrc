@@ -1,6 +1,26 @@
 {
-  "node": true,
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": true,
+  "freeze": true,
+  "noarg": true,
+  "noempty": true,
+  "nonbsp": true,
+  "undef": true,
+  "unused": true,
+  "strict": true,
+  "maxlen": 80,
+  "varstmt": true,
   "esversion": 6,
-  "asi": true,
-  "moz": true
+  "moz": true,
+  "predef": [
+    "expect",
+    "it",
+    "describe"
+  ],
+  // Environments
+  "mocha": true,
+  "node": true,
+  "globals": {}
 }
