@@ -36,6 +36,11 @@ module.exports.compileVscodeSnippets = (config) => {
     let snippet = {};
 
     configLang.forEach((snippetConfig) => {
+
+      if (snippetConfig.ignore) {
+        return false
+      }
+
       let content = readSnippetFile(snippetConfig.name);
       snippet[snippetConfig.trigger] = {
         prefix: snippetConfig.trigger,
