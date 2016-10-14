@@ -18,10 +18,13 @@ module.exports.buildVscodeConfig = (file, editor) => {
   }
 
   function merge(configLang) {
+
     var langArray = [];
-    configLang.forEach((file) => {
+
+    for (let file of configLang) {
       langArray = langArray.concat(readSnippetConfig(file));
-    });
+    }
+
     return langArray;
   }
 
@@ -32,10 +35,12 @@ module.exports.buildVscodeConfig = (file, editor) => {
 }
 
 module.exports.compileVscodeSnippets = (config) => {
-  function mutate(configLang) {
+
+  let mutate = (configLang) => {
+
     let snippet = {};
 
-    configLang.forEach((snippetConfig) => {
+    for (let snippetConfig of configLang) {
 
       if (snippetConfig.ignore) {
         return false
@@ -47,10 +52,11 @@ module.exports.compileVscodeSnippets = (config) => {
         body: content.split('\n'),
         description: snippetConfig.description
       }
-    });
+    }
 
     return snippet;
   }
+
 
   for (let lang in config) {
     config[lang] = mutate(config[lang]);

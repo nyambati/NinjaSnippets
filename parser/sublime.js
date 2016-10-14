@@ -24,12 +24,14 @@ module.exports.buildSublimeConfig = (file, editor) => {
     return console.log('No configuraton supplied for a build');
   }
 
-  buffer[editor].forEach((file) => {
+  for (let file of buffer[editor]) {
+
     let snippetConfig = readSnippetConfig(file);
     if (snippetConfig) {
       config = config.concat(snippetConfig);
     }
-  });
+
+  }
 
   return config;
 }

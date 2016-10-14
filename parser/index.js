@@ -11,17 +11,20 @@ const {
 } = require('./vscode');
 
 module.exports.buildSublimeSnippets = (path, folder) => {
-  buildSublimeConfig('config.yml', 'sublime')
-    .forEach((config) => {
-      compileSublimeSnippet(config, folder);
-    });
+  let sublimeConfig = buildSublimeConfig('config.yml', 'sublime');
+
+  for (let config of sublimeConfig) {
+    compileSublimeSnippet(config, folder);
+  }
+
 };
 
 module.exports.buildVscodeSnippets = (file, folder) => {
   let vsCodeConfig = buildVscodeConfig(file, folder);
   let compiledSnippets = compileVscodeSnippets(vsCodeConfig);
 
-  Object.keys(compiledSnippets).forEach((lang) => {
+  for (let lang of Object.keys(compiledSnippets)) {
     buildVscodeSnippet(lang, compiledSnippets[lang], 'vscode');
-  });
+  }
+
 };
