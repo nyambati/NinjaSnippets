@@ -1,0 +1,28 @@
+---
+# Mongoose snippes
+
+- name: mon-find
+  description: Mongoose find query method
+  trigger: mon:find
+  scope: source.js
+  ignore: true
+
+- name: mon-find-one
+  description: Mongoose findOne query method
+  trigger: mon:findOne
+  scope: source.js
+
+- name: mon-find-by-id
+  description: Mongoose findById query method
+  trigger: mon:findById
+  scope: source.js
+
+- name: mon-find-one-and-update
+  description: Mongoose findOneAndUpdate query method
+  trigger: mon:findOneAndUpdate
+  scope: source.js
+
+- name: mon-find-one-and-remove
+  description: Mongoose findOneAndRemove query method
+  trigger: mon:findOneAndRemove
+  scope: source.js

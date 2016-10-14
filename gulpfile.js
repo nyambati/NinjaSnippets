@@ -1,42 +1,53 @@
+'use strict';
 const gulp = require('gulp');
 const jshint = require('gulp-jshint');
 const shell = require('gulp-shell');
-const parse = require('./parser');
-const fs = require('fs');
-const yaml = require('js-yaml');
+const clean = require('gulp-clean');
+const {
+  buildSublimeSnippets,
+  buildVscodeSnippets
+} = require('./parser');
 
-function readConfig() {
-  let buffer;
-  try {
-    buffer = fs.readFileSync('config.yml');
-  } catch (err) {
-    return console.log(err.message);
-  }
 
-  return yaml.safeLoad(buffer);
-
-}
-
-gulp.task('parse', () => {
-  const config = readConfig();
-  return config.forEach((snippetConfig) => {
-    parse(snippetConfig);
-  });
+gulp.task('clean:sublime', function() {
+  return gulp.src(['./ninjaSnippet'], {
+      read: false
+    })
+    .pipe(clean());
 });
 
-gulp.task('build', ['parse'], shell.task([
+gulp.task('clean:vscode', () => {
+  return gulp.src(['./vscode'], {
+      read: false
+    })
+    .pipe(clean());
+})
+
+gulp.task('build:sublime', ['clean:sublime'], () => {
+  return buildSublimeSnippets('config.yml', 'ninjaSnippet');
+});
+
+gulp.task('build:vscode', ['clean:vscode'], () => {
+  return buildVscodeSnippets('config.yml', 'vscode');
+});
+
+gulp.task('build', ['build:sublime', 'build:vscode'], shell.task([
   'chmod 0755 install.sh',
-  './install.sh'
+  './install.sh -i vscode',
+  './install.sh -i sublime'
 ]));
 
-gulp.task('lint', function () {
+gulp.task('lint', () => {
   return gulp.src('lib/**/*.snippet')
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish', { verbose: true }));
+    .pipe(jshint.reporter('jshint-stylish', {
+      verbose: true
+    }));
 });
 
 gulp.task('watch', () => {
   gulp.watch('snippets/**.snippet', ['lint', 'build']);
+  gulp.watch('config/**.yml', ['build']);
   gulp.watch('config.yml', ['build']);
 });
 

@@ -1,21 +1,9 @@
 ---
-- name: node-server
-  description: Node main server
-  trigger: node:server
-  scope: source.js
-
-- name: node-model
-  description: Mongoose Model defination
-  trigger: node:model
-  scope: source.js
-
-- name: node-ctrl
-  description: Expressjs controller
-  trigger: node:ctrl
-  scope: source.js
-
-- name: node-route
-  description: Expressjs route
-  trigger: node:route
-  scope: source.js
-
+sublime:
+  - angular
+  - express
+  - mongoose
+vscode:
+  javascript:
+    - mongoose
+    - express

@@ -1,0 +1,32 @@
+---
+# Angular snippets
+- name: ng-comp
+  description: Angular 1 component
+  trigger: ng:comp
+  scope: source.js
+
+- name: ng-on-init
+  description: Angular onInit lifecycle hook
+  trigger: ng:init
+  scope: source.js
+
+- name: ng-on-changes
+  description: Angular onChanges lifecycle hook
+  trigger: ng:change
+  scope: source.js
+
+- name: ng-on-destroy
+  description: Angular onDestroy lifecycle hook
+  trigger: ng:destroy
+  scope: source.js
+
+- name: ng-on-post-link
+  description: Angular postLink lifecycle hook
+  trigger: ng:link
+  scope: source.js
+
+- name: ng-module
+  description: Angular Module
+  trigger: ng:module
+  scope: source.js
+

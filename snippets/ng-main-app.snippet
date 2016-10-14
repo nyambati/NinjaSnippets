@@ -1,0 +1,16 @@
+'use strict';
+import angular from 'angular';
+import { AppConfig, AppRun } from './config';
+import component from './components';
+
+const dependencies = [
+  component.name,
+  Router
+];
+
+
+angular
+  .module('${1:app}', dependencies)
+  .run(AppRun)
+  .config(AppConfig);
+
